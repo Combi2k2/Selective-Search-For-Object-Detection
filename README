@@ -1,11 +1,3 @@
-# Selective-Search-For-Object-Detection-Python
-
-I rewrite the code from the same project, but in python:
-
-The original project:
-
-http://cs.brown.edu/people/pfelzens/segment/
-
 
 Implementation of the segmentation algorithm described in:
 
@@ -30,6 +22,4 @@ output: Output image.
 
 Typical parameters are sigma = 0.5, k = 500, min = 20.
 Larger values for k result in larger components in the result.
-
-
 
