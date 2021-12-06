@@ -1,12 +1,25 @@
-# Selective-Search-For-Object-Detection-Python
+# Selective-Search-For-Object-Detection
 
-I rewrite the code from the same project, but in python:
 
-The original project:
+### Reason of this repo
+I read and reformat the code for my own better comprehension
 
+### Original Project:
 http://cs.brown.edu/people/pfelzens/segment/
 
 
+### Basic idea of the algorithm:
+<li> If some pixels is not quite different from the pixels aroound it, so they merge together and become a new region in the result image </li>
+<li> The colors of the new regions are randomly generated </li>
+<li> It is like masks for region with same color. And merging some masks is the most naive idea for object detection </li>
+
+### Run project:
+Copy the following command to your terminal (but change the arguments INPUT_IMAGE and OUTPUT_IMAGE):
+
+    g++ segment.cpp -o segment
+    ./segment 0.5 500 20 INPUT_IMAGE OUTPUT_IMAGE
+
+### The following lines belong to the actual author of this project:
 Implementation of the segmentation algorithm described in:
 
 Efficient Graph-Based Image Segmentation

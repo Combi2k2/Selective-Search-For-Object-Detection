@@ -16,34 +16,44 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 */
 
+//This code is copied and reformatted by Combi2k2
+//The main idea of this is that:
+/*
+*   If a pixel have the same color with the pixels around it. It will be merged to its "surrounding environment"
+*   Finally, we got multiple regions which have the same color, and merge it selectively, we can get the detected object
+*
+*   The algorithm is nearly linear (the constant attached with disjoint-set algorithm is even smaller than log2(number_of_pixels)
+*   However, it take a lot of time to process high resolution image, and number of color channels even make it slower
+*   Highly recommend NOT trying to code in Python because it is obviously, unbelievably slower
+*/
+
 #include <cstdio>
 #include <cstdlib>
-#include <image.h>
-#include <misc.h>
-#include <pnmfile.h>
+#include "image.h"
+#include "misc.h"
+#include "pnmfile.h"
 #include "segment-image.h"
 
 int main(int argc, char **argv) {
-  if (argc != 6) {
-    fprintf(stderr, "usage: %s sigma k min input(ppm) output(ppm)\n", argv[0]);
-    return 1;
-  }
-  
-  float sigma = atof(argv[1]);
-  float k = atof(argv[2]);
-  int min_size = atoi(argv[3]);
-	
-  printf("loading input image.\n");
-  image<rgb> *input = loadPPM(argv[4]);
-	
-  printf("processing\n");
-  int num_ccs; 
-  image<rgb> *seg = segment_image(input, sigma, k, min_size, &num_ccs); 
-  savePPM(seg, argv[5]);
+    if (argc != 6)  {
+        fprintf(stderr, "usage: %s sigma k min input(ppm) output(ppm)\n", argv[0]);
+        return 1;
+    }
+    float sigma = atof(argv[1]);
+    float k     = atof(argv[2]);
+    int min_size = atoi(argv[3]);
+    
+    printf("loading input image.\n");
+    image<rgb> *input = loadPPM(argv[4]);
+    
+    printf("processing\n");
+    int num_ccs;
+    image<rgb> *seg = segment_image(input, sigma, k, min_size, num_ccs); 
+    savePPM(seg, argv[5]);
 
-  printf("got %d components\n", num_ccs);
-  printf("done! uff...thats hard work.\n");
+    printf("got %d components\n", num_ccs);
+    printf("done! uff...thats hard work.\n");
 
-  return 0;
+    return 0;
 }
 
