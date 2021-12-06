@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 #include <cstdlib>
 #include "image.h"
 #include "misc.h"
-#include "pnmfile.h"
+#include "image-processing.h"
 #include "segment-image.h"
 
 int main(int argc, char **argv) {
@@ -44,12 +44,12 @@ int main(int argc, char **argv) {
     int min_size = atoi(argv[3]);
     
     printf("loading input image.\n");
-    image<rgb> *input = loadPPM(argv[4]);
+    image<rgb> *input = load_image(argv[4]);
     
     printf("processing\n");
     int num_ccs;
     image<rgb> *seg = segment_image(input, sigma, k, min_size, num_ccs); 
-    savePPM(seg, argv[5]);
+    save_image(seg, argv[5]);
 
     printf("got %d components\n", num_ccs);
     printf("done! uff...thats hard work.\n");
