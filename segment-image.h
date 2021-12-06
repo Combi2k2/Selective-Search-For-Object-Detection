@@ -106,10 +106,10 @@ image<rgb> *segment_image(image<rgb> *im, float sigma, float c, int min_size, in
     
     // post process small components
     for(int i = 0 ; i < num ; ++i)  {
-        int a = u -> find(edges[i].a);
-        int b = u -> find(edges[i].b);
+        int a = edges[i].a;
+        int b = edges[i].b;
 
-        if (a == b)   continue;
+        if (u -> find(a) == u -> find(b))   continue;
         if (u -> size(a) < min_size)  u -> join(a, b);
         if (u -> size(b) < min_size)  u -> join(a, b);
     }

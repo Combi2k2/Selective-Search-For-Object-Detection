@@ -109,14 +109,11 @@ static void save_image(image<rgb> *im, const char *name)  {
 
     for(int y = 0 ; y < height ; ++y)
     for(int x = 0 ; x < width  ; ++x)   {
-        //if (channels == 3)  {
         *ptr++ = imRef(im, x, y).r;
         *ptr++ = imRef(im, x, y).g;
         *ptr++ = imRef(im, x, y).b;
-        //}
-        //else    *ptr++ = imRef(im, x, y);
     }
-    /*std::string extension = "";
+    std::string extension = "";
     
     extension += name[strlen(name) - 3];
     extension += name[strlen(name) - 2];
@@ -124,13 +121,13 @@ static void save_image(image<rgb> *im, const char *name)  {
 
     printf("%s", extension.c_str());
 
-    if (extension == "jpg")*/ stbi_write_jpg(name, width, height, channels, img, 100);
-    //if (extension == "png") stbi_write_png(name, width, height, channels, img, 100);
+    if (extension == "jpg") stbi_write_jpg(name, width, height, channels, img, 100);
+    if (extension == "png") stbi_write_png(name, width, height, channels, img, 100);
 
-    //if (extension != "jpg" && extension != "png")   {
-    //    printf("I dont know how to save image with other extension, sorry");
-    //    throw image_error();
-    //}
+    if (extension != "jpg" && extension != "png")   {
+        printf("I dont know how to save image with other extension, sorry");
+        throw image_error();
+    }
     delete [] img;
 }
 

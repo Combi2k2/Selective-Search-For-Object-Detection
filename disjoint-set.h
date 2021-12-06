@@ -50,7 +50,6 @@ class universe  {
                 y = x - y;
                 x = x - y;
             }
-            
             p[y] = x;
             s[x] += s[y];
 
