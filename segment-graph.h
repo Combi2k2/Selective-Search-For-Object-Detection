@@ -58,18 +58,20 @@ universe *segment_graph(int num_vertices, int num_edges, edge *edges, float c) {
 
     // for each edge, in non-decreasing weight order...
 
-    for(int i = 0 ; i < num_edges ; ++i)  {
-        edge *e = &edges[i];
+    for(edge *e = edges ; e != edges + num_edges ; ++e) {
         //components connected by this edge
 
         int a = u -> find(e -> a);
         int b = u -> find(e -> b);
 
-        if (a != b && (e -> w <= threshold[a]) && (e -> w <= threshold[b])) {
-            u -> join(a, b);
-            a = u -> find(a);
-            threshold[a] = (e -> w) + THRESHOLD(u -> size(a), c);
-        }
+        if (a == b) continue;
+        if ((e -> w) > threshold[a])    continue;
+        if ((e -> w) > threshold[b])    continue;
+
+        u -> join(a, b);
+        a = u -> find(a);
+
+        threshold[a] = (e -> w) + THRESHOLD(u -> size(a), c);
     }
     delete [] threshold;
     return u;

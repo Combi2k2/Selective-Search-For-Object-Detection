@@ -35,25 +35,24 @@ using namespace std;
 /* normalize mask so it integrates to one */
 static void normalize(vector<float> &mask)  {
     int len = mask.size();
-    float sum = -mask[0];
+    float sum = -fabs(mask[0]);
 
-    for(int i = 0 ; i < len ; ++i)  sum += 2 * mask[i];
-    for(int i = 0 ; i < len ; ++i)  mask[i] /= sum; 
-
+    for(int i = 0 ; i < len ; ++i)  sum += 2 * fabs(mask[i]);
+    for(int i = 0 ; i < len ; ++i)  mask[i] /= sum;
 }
 
 /* make filters */
-#define MAKE_FILTER(name, fun)                            \
-static vector<float> make_ ## name (float sigma)  {       \
-    sigma = std::max(sigma, 0.01F);			                  \
-    int len = (int)ceil(sigma * WIDTH) + 1;               \
-    vector<float> mask(len);                              \
-    for(int i = 0 ; i < len ; ++i)                        \
-        mask[i] = fun;                                    \
-    return  mask;                                         \
+#define MAKE_FILTER(name, fun)                      \
+static vector<float> make_ ## name (float sigma)  { \
+    sigma = max(sigma, 0.01F);			            \
+    int len = (int)ceil(sigma * WIDTH) + 1;         \
+    vector<float> mask(len);                        \
+    for(int i = 0 ; i < len ; ++i)                  \
+        mask[i] = fun;                              \
+    return  mask;                                   \
 }
 
-MAKE_FILTER(fgauss, exp(-0.5*square(i / sigma)));
+MAKE_FILTER(fgauss, exp(-0.5 * square(i / sigma)));
 
 /* convolve image with gaussian filter */
 static image<float> *smooth(image<float> *src, float sigma) {
