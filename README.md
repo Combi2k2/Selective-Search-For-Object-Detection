@@ -11,7 +11,8 @@ http://cs.brown.edu/people/pfelzens/segment/
 ### Basic idea of the algorithm:
 <li> If some pixels is not quite different from the pixels aroound it, so they merge together and become a new region in the result image </li>
 <li> The colors of the new regions are randomly generated </li>
-<li> It is like masks for region with same color. And merging some masks is the most naive idea for object detection </li>
+<li> They is like masks for regions with same color </li>
+<li> Merging some masks is the most naive idea for object detection </li>
 
 ### Run project:
 Copy the following command to your terminal (but change the arguments INPUT_IMAGE and OUTPUT_IMAGE):
