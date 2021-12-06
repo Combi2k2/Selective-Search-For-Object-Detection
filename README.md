@@ -20,6 +20,10 @@ Copy the following command to your terminal (but change the arguments INPUT_IMAG
     g++ segment.cpp -o segment
     ./segment 0.5 500 20 INPUT_IMAGE OUTPUT_IMAGE
 
+I am not able to understand the Makefile, at least now. So I write my own method for compile the file.
+
+DON'T BLAME MEEEE😭😭😭
+
 ### The following lines belong to the actual author of this project:
 Implementation of the segmentation algorithm described in:
 
